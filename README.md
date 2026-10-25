@@ -43,7 +43,7 @@ Useful commands (JDK 21 required):
 ```
 ./gradlew build                # builds all three jars into <loader>/build/libs
 ./gradlew :neoforge:runData    # regenerates common/src/generated/resources
-./gradlew :fabric:runClient    # or :neoforge:runClient / :forge:Client
+./gradlew :fabric:runClient    # or :neoforge:runClient / :forge:runClient
 ```
 
 Block states, models, recipes, loot tables, tags and translations are **generated** – never edit

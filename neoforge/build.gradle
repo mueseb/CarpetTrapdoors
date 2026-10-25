@@ -22,7 +22,7 @@ neoForge {
         }
         // Generates the shared resources of all loaders: ./gradlew :neoforge:runData
         data {
-            data()
+            clientData()
             programArguments.addAll '--mod', mod_id, '--all',
                     '--output', rootProject.file('common/src/generated/resources/').absolutePath,
                     '--existing', rootProject.file('common/src/main/resources/').absolutePath

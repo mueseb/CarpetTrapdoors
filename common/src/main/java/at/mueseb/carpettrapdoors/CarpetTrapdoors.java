@@ -1,7 +1,9 @@
 package at.mueseb.carpettrapdoors;
 
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -91,6 +93,7 @@ public final class CarpetTrapdoors {
 
         public CarpetTrapdoorBlock createBlock() {
             BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
+                    .setId(ResourceKey.create(Registries.BLOCK, CarpetTrapdoors.id(id())))
                     .mapColor(carpet.carpet.defaultMapColor())
                     .sound(carpet.carpet.defaultBlockState().getSoundType())
                     .strength(0.1F)
@@ -134,7 +137,9 @@ public final class CarpetTrapdoors {
 
     /** Creates the item for a carpet trapdoor block that was registered under {@code id}. */
     public static BlockItem createBlockItem(String id, Block block) {
-        return new BlockItem(block, new Item.Properties()) {
+        return new BlockItem(block, new Item.Properties()
+                .setId(ResourceKey.create(Registries.ITEM, id(id)))
+                .useBlockDescriptionPrefix()) {
             @Override
             public Component getName(ItemStack stack) {
                 return block.getName();
@@ -142,8 +147,8 @@ public final class CarpetTrapdoors {
         };
     }
 
-    public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    public static Identifier id(String path) {
+        return Identifier.fromNamespaceAndPath(MOD_ID, path);
     }
 
     // Creative tab

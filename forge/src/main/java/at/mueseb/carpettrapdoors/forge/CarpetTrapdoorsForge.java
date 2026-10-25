@@ -5,7 +5,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -27,7 +27,7 @@ public class CarpetTrapdoorsForge {
         });
         TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder()).build());
 
-        IEventBus modBus = context.getModEventBus();
+        BusGroup modBus = context.getModBusGroup();
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         TABS.register(modBus);

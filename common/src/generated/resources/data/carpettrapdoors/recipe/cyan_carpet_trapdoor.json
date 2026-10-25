@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "carpet_trapdoor",
   "key": {
-    "#": {
-      "item": "minecraft:cyan_carpet"
-    },
-    "O": {
-      "tag": "minecraft:wooden_trapdoors"
-    }
+    "#": "minecraft:cyan_carpet",
+    "O": "#minecraft:wooden_trapdoors"
   },
   "pattern": [
     " # ",

@@ -7,7 +7,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -23,14 +22,14 @@ import java.util.concurrent.CompletableFuture;
  */
 public class ModRecipeProvider extends RecipeProvider {
 
-    public ModRecipeProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookup) {
-        super(output, lookup);
+    protected ModRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+        super(registries, output);
     }
 
     @Override
-    protected void buildRecipes(RecipeOutput output) {
+    protected void buildRecipes() {
         for (Variant variant : CarpetTrapdoors.VARIANTS) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, CarpetTrapdoors.block(variant))
+            shaped(RecipeCategory.REDSTONE, CarpetTrapdoors.block(variant))
                     .define('#', variant.carpet().carpet)
                     .define('O', trapdoor(variant.type()))
                     .pattern(" # ")
@@ -42,11 +41,28 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
 
-    private static Ingredient trapdoor(CarpetTrapdoors.Type type) {
+    private Ingredient trapdoor(CarpetTrapdoors.Type type) {
         return switch (type) {
-            case WOODEN -> Ingredient.of(ItemTags.WOODEN_TRAPDOORS);
+            case WOODEN -> tag(ItemTags.WOODEN_TRAPDOORS);
             case IRON -> Ingredient.of(Items.IRON_TRAPDOOR);
-            case COPPER -> Ingredient.of(ModItemTagsProvider.COPPER_TRAPDOORS);
+            case COPPER -> tag(ModItemTagsProvider.COPPER_TRAPDOORS);
         };
+    }
+
+    public static class Runner extends RecipeProvider.Runner {
+
+        public Runner(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+            super(output, registries);
+        }
+
+        @Override
+        protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
+            return new ModRecipeProvider(registries, output);
+        }
+
+        @Override
+        public String getName() {
+            return "Carpet Trapdoors recipes";
+        }
     }
 }

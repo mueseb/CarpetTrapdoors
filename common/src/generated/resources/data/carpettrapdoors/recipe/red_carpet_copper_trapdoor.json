@@ -3,12 +3,8 @@
   "category": "redstone",
   "group": "carpet_copper_trapdoor",
   "key": {
-    "#": {
-      "item": "minecraft:red_carpet"
-    },
-    "O": {
-      "tag": "carpettrapdoors:copper_trapdoors"
-    }
+    "#": "minecraft:red_carpet",
+    "O": "#carpettrapdoors:copper_trapdoors"
   },
   "pattern": [
     " # ",
