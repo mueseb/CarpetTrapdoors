@@ -7,7 +7,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -26,13 +25,13 @@ public class CarpetTrapdoorBlock extends TrapDoorBlock {
 
     private final Component name;
 
-    public CarpetTrapdoorBlock(Properties properties, BlockSetType type) {
-        this(properties, type, null);
+    public CarpetTrapdoorBlock(Properties properties) {
+        this(properties, null);
     }
 
     /** @param name the display name, or {@code null} for the default name from the translation key */
-    public CarpetTrapdoorBlock(Properties properties, BlockSetType type, Component name) {
-        super(properties, type);
+    public CarpetTrapdoorBlock(Properties properties, Component name) {
+        super(properties);
         this.name = name;
     }
 

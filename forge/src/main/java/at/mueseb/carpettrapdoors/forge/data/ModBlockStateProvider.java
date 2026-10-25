@@ -4,8 +4,7 @@ import at.mueseb.carpettrapdoors.CarpetTrapdoorBlock;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors.Carpet;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors.Variant;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
@@ -18,8 +17,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  */
 public class ModBlockStateProvider extends BlockStateProvider {
 
-    public ModBlockStateProvider(PackOutput output, ExistingFileHelper files) {
-        super(output, CarpetTrapdoors.MOD_ID, files);
+    public ModBlockStateProvider(DataGenerator generator, ExistingFileHelper files) {
+        super(generator, CarpetTrapdoors.MOD_ID, files);
     }
 
     @Override
@@ -33,12 +32,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 
             // Not orientable: closed trapdoors keep the same texture rotation as wool, whichever way they were placed.
             trapdoorBlock((CarpetTrapdoorBlock) CarpetTrapdoors.block(variant), bottom, top, open, false);
-            itemModels().withExistingParent(variant.id(), BuiltInRegistries.BLOCK.getKey(carpet.carpet).withPrefix("block/"));
+            itemModels().withExistingParent(variant.id(), blockTexture(carpet.carpet));
         }
     }
 
     private ModelFile coloredModel(String name, String template, Carpet carpet) {
-        ResourceLocation texture = BuiltInRegistries.BLOCK.getKey(carpet.textureBlock).withPrefix("block/");
+        ResourceLocation texture = blockTexture(carpet.textureBlock);
         return models().withExistingParent(name, modLoc("block/" + template))
                 .texture("0", texture)
                 .texture("particle", texture);

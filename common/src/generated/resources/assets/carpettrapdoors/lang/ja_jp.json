@@ -1,5 +1,6 @@
 {
   "block.carpettrapdoors.carpet_iron_trapdoor": "%sの鉄のトラップドア",
   "block.carpettrapdoors.carpet_trapdoor": "%sのトラップドア",
-  "itemGroup.carpettrapdoors": "カーペットトラップドア"
+  "itemGroup.carpettrapdoors": "カーペットトラップドア",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "カーペットトラップドア"
 }

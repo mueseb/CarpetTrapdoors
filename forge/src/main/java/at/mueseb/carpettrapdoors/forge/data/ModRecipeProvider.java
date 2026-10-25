@@ -2,8 +2,7 @@ package at.mueseb.carpettrapdoors.forge.data;
 
 import at.mueseb.carpettrapdoors.CarpetTrapdoors;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors.Variant;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -22,14 +21,14 @@ import java.util.function.Consumer;
  */
 public class ModRecipeProvider extends RecipeProvider {
 
-    public ModRecipeProvider(PackOutput output) {
-        super(output);
+    public ModRecipeProvider(DataGenerator generator) {
+        super(generator);
     }
 
     @Override
-    protected void buildRecipes(Consumer<FinishedRecipe> output) {
+    protected void buildCraftingRecipes(Consumer<FinishedRecipe> output) {
         for (Variant variant : CarpetTrapdoors.VARIANTS) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE, CarpetTrapdoors.block(variant))
+            ShapedRecipeBuilder.shaped(CarpetTrapdoors.block(variant))
                     .define('#', variant.carpet().carpet)
                     .define('O', trapdoor(variant.type()))
                     .pattern(" # ")

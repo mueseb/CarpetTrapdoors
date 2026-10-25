@@ -1,5 +1,6 @@
 {
   "block.carpettrapdoors.carpet_iron_trapdoor": "%s Eisenfalltür",
   "block.carpettrapdoors.carpet_trapdoor": "%s Falltür",
-  "itemGroup.carpettrapdoors": "Teppichfalltüren"
+  "itemGroup.carpettrapdoors": "Teppichfalltüren",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "Teppichfalltüren"
 }

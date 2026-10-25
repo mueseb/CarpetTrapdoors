@@ -1,5 +1,6 @@
 {
   "block.carpettrapdoors.carpet_iron_trapdoor": "%s (Alçapão de Ferro)",
   "block.carpettrapdoors.carpet_trapdoor": "%s (Alçapão)",
-  "itemGroup.carpettrapdoors": "Alçapões de Tapete"
+  "itemGroup.carpettrapdoors": "Alçapões de Tapete",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "Alçapões de Tapete"
 }

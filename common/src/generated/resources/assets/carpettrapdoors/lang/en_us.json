@@ -35,5 +35,6 @@
   "block.carpettrapdoors.white_carpet_trapdoor": "White Carpet Trapdoor",
   "block.carpettrapdoors.yellow_carpet_iron_trapdoor": "Yellow Carpet Iron Trapdoor",
   "block.carpettrapdoors.yellow_carpet_trapdoor": "Yellow Carpet Trapdoor",
-  "itemGroup.carpettrapdoors": "Carpet Trapdoors"
+  "itemGroup.carpettrapdoors": "Carpet Trapdoors",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "Carpet Trapdoors"
 }

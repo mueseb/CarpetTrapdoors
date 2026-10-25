@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "redstone",
   "group": "carpet_trapdoor",
   "key": {
     "#": {
@@ -17,6 +16,5 @@
   ],
   "result": {
     "item": "carpettrapdoors:cyan_carpet_trapdoor"
-  },
-  "show_notification": true
+  }
 }

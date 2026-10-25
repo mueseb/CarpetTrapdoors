@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.Material;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -61,15 +61,16 @@ public final class CarpetTrapdoors {
     }
 
     public enum Type {
-        WOODEN("carpet_trapdoor", BlockSetType.OAK),
-        IRON("carpet_iron_trapdoor", BlockSetType.IRON);
+        // Before 1.19.4 the material decides how a trapdoor behaves: metal ones only open with redstone.
+        WOODEN("carpet_trapdoor", Material.WOOL),
+        IRON("carpet_iron_trapdoor", Material.METAL);
 
         public final String suffix;
-        public final BlockSetType blockSetType;
+        public final Material material;
 
-        Type(String suffix, BlockSetType blockSetType) {
+        Type(String suffix, Material material) {
             this.suffix = suffix;
-            this.blockSetType = blockSetType;
+            this.material = material;
         }
 
         /** Translation key of the name pattern, e.g. "%s Iron Trapdoor" where %s is the vanilla carpet name. */
@@ -89,12 +90,11 @@ public final class CarpetTrapdoors {
         }
 
         public CarpetTrapdoorBlock createBlock() {
-            BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
-                    .mapColor(carpet.carpet.defaultMapColor())
+            BlockBehaviour.Properties properties = BlockBehaviour.Properties.of(type.material, carpet.carpet.defaultMaterialColor())
                     .sound(carpet.carpet.defaultBlockState().getSoundType())
                     .strength(0.1F)
                     .noOcclusion();
-            return new CarpetTrapdoorBlock(properties, type.blockSetType, name());
+            return new CarpetTrapdoorBlock(properties, name());
         }
     }
 
@@ -133,7 +133,7 @@ public final class CarpetTrapdoors {
 
     /** Creates the item for a carpet trapdoor block that was registered under {@code id}. */
     public static BlockItem createBlockItem(String id, Block block) {
-        return new BlockItem(block, new Item.Properties()) {
+        return new BlockItem(block, new Item.Properties().tab(tab)) {
             @Override
             public Component getName(ItemStack stack) {
                 return block.getName();
@@ -148,12 +148,11 @@ public final class CarpetTrapdoors {
     // Creative tab
 
     public static final String TAB_ID = MOD_ID;
-    public static final Component TAB_TITLE = Component.translatable("itemGroup." + MOD_ID);
 
-    public static CreativeModeTab.Builder configureTab(CreativeModeTab.Builder builder) {
-        return builder
-                .title(TAB_TITLE)
-                .icon(() -> new ItemStack(block(new Variant(Carpet.RED, Type.WOODEN))))
-                .displayItems((parameters, output) -> BLOCKS.values().forEach(block -> output.accept(block.get())));
+    /** Created by the loader before any item, because items name their tab in their properties before 1.19.3. */
+    public static CreativeModeTab tab;
+
+    public static ItemStack tabIcon() {
+        return new ItemStack(block(new Variant(Carpet.RED, Type.WOODEN)));
     }
 }

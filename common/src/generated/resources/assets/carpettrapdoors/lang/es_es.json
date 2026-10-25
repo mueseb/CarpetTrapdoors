@@ -1,5 +1,6 @@
 {
   "block.carpettrapdoors.carpet_iron_trapdoor": "%s (trampilla de hierro)",
   "block.carpettrapdoors.carpet_trapdoor": "%s (trampilla)",
-  "itemGroup.carpettrapdoors": "Trampillas de alfombra"
+  "itemGroup.carpettrapdoors": "Trampillas de alfombra",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "Trampillas de alfombra"
 }

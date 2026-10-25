@@ -3,7 +3,7 @@ package at.mueseb.carpettrapdoors.forge.data;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors.Type;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors.Variant;
-import net.minecraft.data.PackOutput;
+import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
 
 import java.util.Arrays;
@@ -31,8 +31,8 @@ public class ModLanguageProvider extends LanguageProvider {
 
     private final String locale;
 
-    public ModLanguageProvider(PackOutput output, String locale) {
-        super(output, CarpetTrapdoors.MOD_ID, locale);
+    public ModLanguageProvider(DataGenerator generator, String locale) {
+        super(generator, CarpetTrapdoors.MOD_ID, locale);
         this.locale = locale;
     }
 
@@ -43,6 +43,8 @@ public class ModLanguageProvider extends LanguageProvider {
             add(type.translationKey(), names.get(type.ordinal()));
         }
         add("itemGroup." + CarpetTrapdoors.MOD_ID, names.get(3));
+        // Fabric's tab builder names the tab after its full id
+        add("itemGroup." + CarpetTrapdoors.MOD_ID + "." + CarpetTrapdoors.TAB_ID, names.get(3));
 
         if (locale.equals("en_us")) {
             // Full names under the blocks' own keys, for mods that read the translation key instead of the name.
