@@ -19,7 +19,9 @@ import java.util.concurrent.CompletableFuture;
 /**
  * Generates the resources shared by all loaders. Run with {@code ./gradlew :neoforge:runData}.
  */
-@EventBusSubscriber(modid = CarpetTrapdoors.MOD_ID)
+// Early NeoForge 1.21 builds do not pick the mod bus by themselves, so it is named here.
+@SuppressWarnings("removal")
+@EventBusSubscriber(modid = CarpetTrapdoors.MOD_ID, bus = EventBusSubscriber.Bus.MOD)
 public final class DataGenerators {
 
     private DataGenerators() {

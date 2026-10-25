@@ -19,7 +19,10 @@ public class CarpetTrapdoorsForge {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CarpetTrapdoors.MOD_ID);
     private static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CarpetTrapdoors.MOD_ID);
 
-    public CarpetTrapdoorsForge(FMLJavaModLoadingContext context) {
+    // Forge only passes the loading context to the constructor from 52.0.9 on, get() works on every 1.21 and 1.21.1 build.
+    @SuppressWarnings("removal")
+    public CarpetTrapdoorsForge() {
+        FMLJavaModLoadingContext context = FMLJavaModLoadingContext.get();
         CarpetTrapdoors.registerBlocks((id, supplier) -> {
             RegistryObject<Block> block = BLOCKS.register(id, supplier);
             ITEMS.register(id, () -> CarpetTrapdoors.createBlockItem(id, block.get()));
