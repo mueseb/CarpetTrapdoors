@@ -5,6 +5,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
@@ -25,20 +26,34 @@ public class CarpetTrapdoorBlock extends TrapDoorBlock {
     private static final VoxelShape EAST_OPEN = Block.box(0, 0, 0, 1, 16, 16);
 
     private final Component name;
+    private final SoundType sound;
 
     public CarpetTrapdoorBlock(BlockSetType type, Properties properties) {
-        this(type, properties, null);
+        this(type, properties, null, null);
     }
 
-    /** @param name the display name, or {@code null} for the default name from the translation key */
-    public CarpetTrapdoorBlock(BlockSetType type, Properties properties, Component name) {
+    /**
+     * @param name  the display name, or {@code null} for the default name from the translation key
+     * @param carpetSound the carpet's sound for walking on the trapdoor, or {@code null} to only use the trapdoor sound
+     */
+    public CarpetTrapdoorBlock(BlockSetType type, Properties properties, Component name, SoundType carpetSound) {
         super(type, properties);
         this.name = name;
+        // Building sounds like the trapdoor type (wood, iron, copper), walking on it sounds like the carpet it hides under.
+        SoundType trapdoor = type.soundType();
+        this.sound = carpetSound == null ? null : new SoundType(carpetSound.getVolume(), carpetSound.getPitch(),
+                trapdoor.getBreakSound(), carpetSound.getStepSound(), trapdoor.getPlaceSound(), trapdoor.getHitSound(), carpetSound.getFallSound());
     }
 
     @Override
     public MutableComponent getName() {
         return name != null ? name.copy() : super.getName();
+    }
+
+    // TrapDoorBlock replaces the sound in the properties with the one of its block set type.
+    @Override
+    protected SoundType getSoundType(BlockState state) {
+        return sound != null ? sound : super.getSoundType(state);
     }
 
     @Override
