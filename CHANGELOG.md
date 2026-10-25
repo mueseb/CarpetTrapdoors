@@ -1,3 +1,10 @@
+**Carpet Trapdoors 2.1.1**
+
+- Walking on a carpet trapdoor now sounds like the carpet it hides under, so the trap no longer gives itself away. Before, you heard the block underneath (or the trapdoor's wood/iron sound).
+- Placing and breaking still sounds like a trapdoor (wood or iron), opening and closing is unchanged.
+- Fixed: the 1.20.1 file did not load on NeoForge 1.20.1.
+- Forge no longer needs its newest build, older builds for this Minecraft version work too.
+
 **Carpet Trapdoors 2.1.0** – one mod for Fabric, Forge and NeoForge
 
 - New: **copper carpet trapdoors** (Minecraft 1.21+). The recipe accepts every copper trapdoor, waxed or not, at any oxidation stage.

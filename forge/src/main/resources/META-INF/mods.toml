@@ -13,10 +13,11 @@ credits = "${credits}"
 authors = "${mod_author}"
 description = '''${description}'''
 
+# Also lets NeoForge 1.20.1 load the mod, it reports itself as Forge 47.1.
 [[dependencies.${mod_id}]]
 modId = "forge"
 mandatory = true
-versionRange = "[${forge_version},)"
+versionRange = "${forge_version_range}"
 ordering = "NONE"
 side = "BOTH"
 

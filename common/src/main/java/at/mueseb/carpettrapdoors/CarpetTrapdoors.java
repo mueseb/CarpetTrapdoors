@@ -91,10 +91,9 @@ public final class CarpetTrapdoors {
         public CarpetTrapdoorBlock createBlock() {
             BlockBehaviour.Properties properties = BlockBehaviour.Properties.of()
                     .mapColor(carpet.carpet.defaultMapColor())
-                    .sound(carpet.carpet.defaultBlockState().getSoundType())
                     .strength(0.1F)
                     .noOcclusion();
-            return new CarpetTrapdoorBlock(properties, type.blockSetType, name());
+            return new CarpetTrapdoorBlock(properties, type.blockSetType, name(), carpet.carpet.defaultBlockState().getSoundType());
         }
     }
 
