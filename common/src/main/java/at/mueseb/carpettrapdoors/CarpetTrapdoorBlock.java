@@ -1,7 +1,5 @@
 package at.mueseb.carpettrapdoors;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -18,11 +16,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  * A trapdoor that is only one pixel thick, so it looks and feels like a carpet.
  */
 public class CarpetTrapdoorBlock extends TrapDoorBlock {
-
-    public static final MapCodec<CarpetTrapdoorBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            BlockSetType.CODEC.fieldOf("block_set_type").forGetter(CarpetTrapdoorBlock::getType),
-            propertiesCodec()
-    ).apply(instance, CarpetTrapdoorBlock::new));
 
     private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 1, 16);
     private static final VoxelShape TOP = Block.box(0, 15, 0, 16, 16, 16);
@@ -46,11 +39,6 @@ public class CarpetTrapdoorBlock extends TrapDoorBlock {
     @Override
     public MutableComponent getName() {
         return name != null ? name.copy() : super.getName();
-    }
-
-    @Override
-    public MapCodec<? extends TrapDoorBlock> codec() {
-        return CODEC;
     }
 
     @Override

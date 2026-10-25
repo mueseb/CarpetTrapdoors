@@ -12,8 +12,8 @@ import net.minecraft.client.data.models.model.ModelLocationUtils;
 import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
 import java.util.Optional;
@@ -38,7 +38,7 @@ public class ModModelProvider extends ModelProvider {
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
         for (Carpet carpet : Carpet.values()) {
             String base = "block/" + carpet.id() + "_carpet_trapdoor";
-            Identifier texture = TextureMapping.getBlockTexture(carpet.textureBlock);
+            Material texture = TextureMapping.getBlockTexture(carpet.textureBlock);
             TextureMapping textures = new TextureMapping().put(TEXTURE, texture).put(TextureSlot.PARTICLE, texture);
 
             MultiVariant bottom = BlockModelGenerators.plainVariant(BOTTOM.create(CarpetTrapdoors.id(base + "_bottom"), textures, blockModels.modelOutput));

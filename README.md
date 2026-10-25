@@ -38,7 +38,7 @@ its own branch (`1.20.1`, `1.21.1`, …).
 | `neoforge/` | NeoForge entry point and the data generators                                  |
 | `forge/`    | Forge entry point (registration only)                                         |
 
-Useful commands (JDK 21 required):
+Useful commands (this branch needs JDK 25):
 
 ```
 ./gradlew build                # builds all three jars into <loader>/build/libs

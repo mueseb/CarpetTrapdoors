@@ -6,6 +6,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -30,22 +31,22 @@ public final class CarpetTrapdoors {
 
     public enum Carpet {
         MOSS(Blocks.MOSS_CARPET, Blocks.MOSS_BLOCK),
-        WHITE(Blocks.WHITE_CARPET, Blocks.WHITE_WOOL),
-        ORANGE(Blocks.ORANGE_CARPET, Blocks.ORANGE_WOOL),
-        MAGENTA(Blocks.MAGENTA_CARPET, Blocks.MAGENTA_WOOL),
-        LIGHT_BLUE(Blocks.LIGHT_BLUE_CARPET, Blocks.LIGHT_BLUE_WOOL),
-        YELLOW(Blocks.YELLOW_CARPET, Blocks.YELLOW_WOOL),
-        LIME(Blocks.LIME_CARPET, Blocks.LIME_WOOL),
-        PINK(Blocks.PINK_CARPET, Blocks.PINK_WOOL),
-        GRAY(Blocks.GRAY_CARPET, Blocks.GRAY_WOOL),
-        LIGHT_GRAY(Blocks.LIGHT_GRAY_CARPET, Blocks.LIGHT_GRAY_WOOL),
-        CYAN(Blocks.CYAN_CARPET, Blocks.CYAN_WOOL),
-        PURPLE(Blocks.PURPLE_CARPET, Blocks.PURPLE_WOOL),
-        BLUE(Blocks.BLUE_CARPET, Blocks.BLUE_WOOL),
-        BROWN(Blocks.BROWN_CARPET, Blocks.BROWN_WOOL),
-        GREEN(Blocks.GREEN_CARPET, Blocks.GREEN_WOOL),
-        RED(Blocks.RED_CARPET, Blocks.RED_WOOL),
-        BLACK(Blocks.BLACK_CARPET, Blocks.BLACK_WOOL);
+        WHITE(Blocks.CARPET.pick(DyeColor.WHITE), Blocks.WOOL.pick(DyeColor.WHITE)),
+        ORANGE(Blocks.CARPET.pick(DyeColor.ORANGE), Blocks.WOOL.pick(DyeColor.ORANGE)),
+        MAGENTA(Blocks.CARPET.pick(DyeColor.MAGENTA), Blocks.WOOL.pick(DyeColor.MAGENTA)),
+        LIGHT_BLUE(Blocks.CARPET.pick(DyeColor.LIGHT_BLUE), Blocks.WOOL.pick(DyeColor.LIGHT_BLUE)),
+        YELLOW(Blocks.CARPET.pick(DyeColor.YELLOW), Blocks.WOOL.pick(DyeColor.YELLOW)),
+        LIME(Blocks.CARPET.pick(DyeColor.LIME), Blocks.WOOL.pick(DyeColor.LIME)),
+        PINK(Blocks.CARPET.pick(DyeColor.PINK), Blocks.WOOL.pick(DyeColor.PINK)),
+        GRAY(Blocks.CARPET.pick(DyeColor.GRAY), Blocks.WOOL.pick(DyeColor.GRAY)),
+        LIGHT_GRAY(Blocks.CARPET.pick(DyeColor.LIGHT_GRAY), Blocks.WOOL.pick(DyeColor.LIGHT_GRAY)),
+        CYAN(Blocks.CARPET.pick(DyeColor.CYAN), Blocks.WOOL.pick(DyeColor.CYAN)),
+        PURPLE(Blocks.CARPET.pick(DyeColor.PURPLE), Blocks.WOOL.pick(DyeColor.PURPLE)),
+        BLUE(Blocks.CARPET.pick(DyeColor.BLUE), Blocks.WOOL.pick(DyeColor.BLUE)),
+        BROWN(Blocks.CARPET.pick(DyeColor.BROWN), Blocks.WOOL.pick(DyeColor.BROWN)),
+        GREEN(Blocks.CARPET.pick(DyeColor.GREEN), Blocks.WOOL.pick(DyeColor.GREEN)),
+        RED(Blocks.CARPET.pick(DyeColor.RED), Blocks.WOOL.pick(DyeColor.RED)),
+        BLACK(Blocks.CARPET.pick(DyeColor.BLACK), Blocks.WOOL.pick(DyeColor.BLACK));
 
         /** The vanilla carpet used in the recipe and as item model. */
         public final Block carpet;
@@ -156,10 +157,14 @@ public final class CarpetTrapdoors {
     public static final String TAB_ID = MOD_ID;
     public static final Component TAB_TITLE = Component.translatable("itemGroup." + MOD_ID);
 
+    /** Sets title and icon. The loader adds {@link #tabContents()} itself, since vanilla's tab output type isn't public. */
     public static CreativeModeTab.Builder configureTab(CreativeModeTab.Builder builder) {
         return builder
                 .title(TAB_TITLE)
-                .icon(() -> new ItemStack(block(new Variant(Carpet.RED, Type.WOODEN))))
-                .displayItems((parameters, output) -> BLOCKS.values().forEach(block -> output.accept(block.get())));
+                .icon(() -> new ItemStack(block(new Variant(Carpet.RED, Type.WOODEN))));
+    }
+
+    public static List<Block> tabContents() {
+        return BLOCKS.values().stream().<Block>map(Supplier::get).toList();
     }
 }

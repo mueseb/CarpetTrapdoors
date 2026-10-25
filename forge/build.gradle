@@ -5,8 +5,6 @@ plugins {
 }
 
 minecraft {
-    mappings channel: 'official', version: minecraft_version
-
     runs {
         configureEach {
             workingDir = layout.projectDirectory.dir("runs/${it.name}")

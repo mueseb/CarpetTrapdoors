@@ -25,7 +25,9 @@ public class CarpetTrapdoorsForge {
             ITEMS.register(id, () -> CarpetTrapdoors.createBlockItem(id, block.get()));
             return block;
         });
-        TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder()).build());
+        TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder())
+                .displayItems((parameters, output) -> CarpetTrapdoors.tabContents().forEach(output::accept))
+                .build());
 
         BusGroup modBus = context.getModBusGroup();
         BLOCKS.register(modBus);

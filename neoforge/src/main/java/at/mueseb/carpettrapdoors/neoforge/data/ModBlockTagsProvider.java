@@ -20,7 +20,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         // Lets other mods (and vanilla mechanics) recognise them as trapdoors.
         for (Variant variant : CarpetTrapdoors.VARIANTS) {
             tag(variant.type() == CarpetTrapdoors.Type.WOODEN ? BlockTags.WOODEN_TRAPDOORS : BlockTags.TRAPDOORS)
-                    .add(CarpetTrapdoors.block(variant));
+                    .add(CarpetTrapdoors.block(variant).builtInRegistryHolder().key());
         }
     }
 }

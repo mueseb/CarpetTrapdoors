@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "carpettrapdoors:cyan_carpet_copper_trapdoor"
+        "recipes": "carpettrapdoors:cyan_carpet_copper_trapdoor"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

@@ -21,7 +21,9 @@ public class CarpetTrapdoorsNeoForge {
             ITEMS.register(id, () -> CarpetTrapdoors.createBlockItem(id, block.get()));
             return block;
         });
-        TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder()).build());
+        TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder())
+                .displayItems((parameters, output) -> CarpetTrapdoors.tabContents().forEach(output::accept))
+                .build());
 
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
