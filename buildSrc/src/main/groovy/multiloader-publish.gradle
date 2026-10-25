@@ -1,19 +1,21 @@
-// Prepares the CurseForge upload of each loader jar: ./gradlew publishMods
+// Prepares the CurseForge and Modrinth uploads of each loader jar: ./gradlew publishMods
 // The files and upload details land in <loader>/build/publishMods. Nothing is sent unless you add -Pupload
-// (and CURSEFORGE_TOKEN is set in ~/.gradle/gradle.properties or as environment variable).
+// (and CURSEFORGE_TOKEN and MODRINTH_TOKEN are set in ~/.gradle/gradle.properties or as environment variables).
 // Each loader only sets `publishMods.file`; everything else comes from gradle.properties and CHANGELOG.md.
 plugins {
     id 'me.modmuss50.mod-publish-plugin'
 }
 
-def token = providers.gradleProperty('CURSEFORGE_TOKEN').orElse(providers.environmentVariable('CURSEFORGE_TOKEN'))
+def tokenFor = { String name -> providers.gradleProperty(name).orElse(providers.environmentVariable(name)) }
+def curseforgeToken = tokenFor('CURSEFORGE_TOKEN')
+def modrinthToken = tokenFor('MODRINTH_TOKEN')
 def loaderNames = [fabric: 'Fabric', forge: 'Forge', neoforge: 'NeoForge']
 def loaders = (findProperty("${project.name}_publish_loaders") ?: project.name).split(',')*.trim()
-def gameVersions = curseforge_minecraft_versions.split(',')*.trim()
+def gameVersions = publish_minecraft_versions.split(',')*.trim()
 
 def configureCurseforge = { target, String id ->
     target.projectId = id
-    target.accessToken = token
+    target.accessToken = curseforgeToken
     target.minecraftVersions.addAll(gameVersions)
     target.javaVersions.add(JavaVersion.toVersion(java_version))
     target.client = true
@@ -27,8 +29,10 @@ publishMods {
     changelog = rootProject.file('CHANGELOG.md').text
     type = [release: STABLE, beta: BETA, alpha: ALPHA][release_type]
     displayName = "${mod_name} ${project.version} (${loaderNames[project.name]} ${minecraft_version})"
+    // Modrinth shows the version number in its file list, so it names the loader and game version too.
+    version = "${project.version}+${minecraft_version}-${project.name}"
     modLoaders.addAll(loaders)
-    dryRun = !providers.gradleProperty('upload').isPresent() || !token.isPresent()
+    dryRun = !providers.gradleProperty('upload').isPresent() || !curseforgeToken.isPresent() || !modrinthToken.isPresent()
 
     curseforge {
         configureCurseforge(delegate, curseforge_project_id)
@@ -37,6 +41,14 @@ publishMods {
     if (project.name == 'fabric' && findProperty('curseforge_fabric_project_id')) {
         curseforge('curseforgeFabricProject') {
             configureCurseforge(delegate, curseforge_fabric_project_id)
+        }
+    }
+    modrinth {
+        projectId = modrinth_project_id
+        accessToken = modrinthToken
+        minecraftVersions.addAll(gameVersions)
+        if (project.name == 'fabric') {
+            requires('fabric-api')
         }
     }
 }
