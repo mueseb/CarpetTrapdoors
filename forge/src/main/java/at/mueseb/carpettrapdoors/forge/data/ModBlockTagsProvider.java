@@ -19,6 +19,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         for (Variant variant : CarpetTrapdoors.VARIANTS) {
             tag(variant.type() == CarpetTrapdoors.Type.WOODEN ? BlockTags.WOODEN_TRAPDOORS : BlockTags.TRAPDOORS)
                     .add(CarpetTrapdoors.block(variant));
+            // Step sounds come from the block below the player, which is the floor under a one pixel thin trapdoor.
+            // In this tag the trapdoor's own (carpet) step sound is played instead.
+            tag(BlockTags.INSIDE_STEP_SOUND_BLOCKS).add(CarpetTrapdoors.block(variant));
         }
     }
 }

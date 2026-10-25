@@ -9,6 +9,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
@@ -63,15 +64,18 @@ public final class CarpetTrapdoors {
 
     public enum Type {
         // Before 1.19.4 the material decides how a trapdoor behaves: metal ones only open with redstone.
-        WOODEN("carpet_trapdoor", Material.WOOL),
-        IRON("carpet_iron_trapdoor", Material.METAL);
+        // The sound is the one of the matching vanilla trapdoor, used for building it.
+        WOODEN("carpet_trapdoor", Material.WOOL, SoundType.WOOD),
+        IRON("carpet_iron_trapdoor", Material.METAL, SoundType.METAL);
 
         public final String suffix;
         public final Material material;
+        public final SoundType sound;
 
-        Type(String suffix, Material material) {
+        Type(String suffix, Material material, SoundType sound) {
             this.suffix = suffix;
             this.material = material;
+            this.sound = sound;
         }
 
         /** Translation key of the name pattern, e.g. "%s Iron Trapdoor" where %s is the vanilla carpet name. */
@@ -91,8 +95,12 @@ public final class CarpetTrapdoors {
         }
 
         public CarpetTrapdoorBlock createBlock() {
+            // Building sounds like the trapdoor type (wood, iron), walking on it sounds like the carpet it hides under.
+            SoundType carpetSound = carpet.carpet.defaultBlockState().getSoundType();
+            SoundType sound = new SoundType(carpetSound.getVolume(), carpetSound.getPitch(), type.sound.getBreakSound(),
+                    carpetSound.getStepSound(), type.sound.getPlaceSound(), type.sound.getHitSound(), carpetSound.getFallSound());
             BlockBehaviour.Properties properties = BlockBehaviour.Properties.of(type.material, carpet.carpet.defaultMaterialColor())
-                    .sound(carpet.carpet.defaultBlockState().getSoundType())
+                    .sound(sound)
                     .strength(0.1F)
                     .noOcclusion();
             return new CarpetTrapdoorBlock(properties, name());
