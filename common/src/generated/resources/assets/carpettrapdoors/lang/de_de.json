@@ -1,0 +1,6 @@
+{
+  "block.carpettrapdoors.carpet_copper_trapdoor": "%s Kupferfalltür",
+  "block.carpettrapdoors.carpet_iron_trapdoor": "%s Eisenfalltür",
+  "block.carpettrapdoors.carpet_trapdoor": "%s Falltür",
+  "itemGroup.carpettrapdoors": "Teppichfalltüren"
+}

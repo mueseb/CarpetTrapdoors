@@ -1,0 +1,12 @@
+plugins {
+    id 'groovy-gradle-plugin'
+}
+
+repositories {
+    gradlePluginPortal()
+}
+
+dependencies {
+    // see https://modmuss50.github.io/mod-publish-plugin/ for new versions
+    implementation 'me.modmuss50:mod-publish-plugin:2.2.1'
+}

@@ -1,0 +1,6 @@
+{
+  "block.carpettrapdoors.carpet_copper_trapdoor": "%s铜活板门",
+  "block.carpettrapdoors.carpet_iron_trapdoor": "%s铁活板门",
+  "block.carpettrapdoors.carpet_trapdoor": "%s活板门",
+  "itemGroup.carpettrapdoors": "地毯活板门"
+}

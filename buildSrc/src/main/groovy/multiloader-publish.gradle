@@ -1,0 +1,42 @@
+// Prepares the CurseForge upload of each loader jar: ./gradlew publishMods
+// The files and upload details land in <loader>/build/publishMods. Nothing is sent unless you add -Pupload
+// (and CURSEFORGE_TOKEN is set in ~/.gradle/gradle.properties or as environment variable).
+// Each loader only sets `publishMods.file`; everything else comes from gradle.properties and CHANGELOG.md.
+plugins {
+    id 'me.modmuss50.mod-publish-plugin'
+}
+
+def token = providers.gradleProperty('CURSEFORGE_TOKEN').orElse(providers.environmentVariable('CURSEFORGE_TOKEN'))
+def loaderNames = [fabric: 'Fabric', forge: 'Forge', neoforge: 'NeoForge']
+def loaders = (findProperty("${project.name}_publish_loaders") ?: project.name).split(',')*.trim()
+def gameVersions = curseforge_minecraft_versions.split(',')*.trim()
+
+def configureCurseforge = { target, String id ->
+    target.projectId = id
+    target.accessToken = token
+    target.minecraftVersions.addAll(gameVersions)
+    target.javaVersions.add(JavaVersion.toVersion(java_version))
+    target.client = true
+    target.server = true
+    if (project.name == 'fabric') {
+        target.requires('fabric-api')
+    }
+}
+
+publishMods {
+    changelog = rootProject.file('CHANGELOG.md').text
+    type = [release: STABLE, beta: BETA, alpha: ALPHA][release_type]
+    displayName = "${mod_name} ${project.version} (${loaderNames[project.name]} ${minecraft_version})"
+    modLoaders.addAll(loaders)
+    dryRun = !providers.gradleProperty('upload').isPresent() || !token.isPresent()
+
+    curseforge {
+        configureCurseforge(delegate, curseforge_project_id)
+    }
+    // Fabric files also go to the old Fabric-only project while players move over.
+    if (project.name == 'fabric' && findProperty('curseforge_fabric_project_id')) {
+        curseforge('curseforgeFabricProject') {
+            configureCurseforge(delegate, curseforge_fabric_project_id)
+        }
+    }
+}

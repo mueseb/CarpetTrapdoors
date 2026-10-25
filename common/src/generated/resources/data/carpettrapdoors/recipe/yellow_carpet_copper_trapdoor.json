@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "carpet_copper_trapdoor",
+  "key": {
+    "#": {
+      "item": "minecraft:yellow_carpet"
+    },
+    "O": {
+      "tag": "carpettrapdoors:copper_trapdoors"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#O#",
+    " # "
+  ],
+  "result": {
+    "count": 1,
+    "id": "carpettrapdoors:yellow_carpet_copper_trapdoor"
+  }
+}

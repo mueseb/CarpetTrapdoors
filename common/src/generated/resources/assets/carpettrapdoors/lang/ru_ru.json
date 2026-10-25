@@ -1,0 +1,6 @@
+{
+  "block.carpettrapdoors.carpet_copper_trapdoor": "%s (медный люк)",
+  "block.carpettrapdoors.carpet_iron_trapdoor": "%s (железный люк)",
+  "block.carpettrapdoors.carpet_trapdoor": "%s (люк)",
+  "itemGroup.carpettrapdoors": "Люки-ковры"
+}
