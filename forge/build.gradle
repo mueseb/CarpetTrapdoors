@@ -1,35 +1,42 @@
 plugins {
     id 'multiloader-loader'
     id 'multiloader-publish'
-    id 'net.minecraftforge.gradle'
+    id 'net.neoforged.moddev.legacyforge'
 }
 
-minecraft {
-    mappings channel: 'official', version: minecraft_version
-
+legacyForge {
+    version = "${minecraft_version}-${forge_version}"
+    parchment {
+        minecraftVersion = parchment_minecraft
+        mappingsVersion = parchment_version
+    }
     runs {
-        configureEach {
-            workingDir = layout.projectDirectory.dir("runs/${it.name}")
-            systemProperty 'eventbus.api.strictRuntimeChecks', 'true'
+        client {
+            client()
         }
-        register('client')
-        register('server') {
-            args '--nogui'
+        server {
+            server()
+        }
+        // Generates the shared resources of all loaders: ./gradlew :forge:runData
+        data {
+            data()
+            programArguments.addAll '--mod', mod_id, '--all',
+                    '--output', rootProject.file('common/src/generated/resources/').absolutePath,
+                    '--existing', rootProject.file('common/src/main/resources/').absolutePath
+        }
+    }
+    mods {
+        "${mod_id}" {
+            sourceSet sourceSets.main
         }
     }
 }
 
-repositories {
-    minecraft.mavenizer(it)
-    maven fg.forgeMaven
-    maven fg.minecraftLibsMaven
-    mavenCentral()
-}
-
-dependencies {
-    implementation minecraft.dependency("net.minecraftforge:forge:${minecraft_version}-${forge_version}")
+// Forge 1.20.1 runs on SRG names, so the jar has to be reobfuscated.
+jar {
+    finalizedBy('reobfJar')
 }
 
 publishMods {
-    file = jar.archiveFile
+    file = reobfJar.archiveFile
 }

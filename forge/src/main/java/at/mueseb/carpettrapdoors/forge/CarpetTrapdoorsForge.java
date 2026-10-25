@@ -19,7 +19,7 @@ public class CarpetTrapdoorsForge {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CarpetTrapdoors.MOD_ID);
     private static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, CarpetTrapdoors.MOD_ID);
 
-    public CarpetTrapdoorsForge(FMLJavaModLoadingContext context) {
+    public CarpetTrapdoorsForge() {
         CarpetTrapdoors.registerBlocks((id, supplier) -> {
             RegistryObject<Block> block = BLOCKS.register(id, supplier);
             ITEMS.register(id, () -> CarpetTrapdoors.createBlockItem(id, block.get()));
@@ -27,7 +27,7 @@ public class CarpetTrapdoorsForge {
         });
         TABS.register(CarpetTrapdoors.TAB_ID, () -> CarpetTrapdoors.configureTab(CreativeModeTab.builder()).build());
 
-        IEventBus modBus = context.getModEventBus();
+        IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
         BLOCKS.register(modBus);
         ITEMS.register(modBus);
         TABS.register(modBus);

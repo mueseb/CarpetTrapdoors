@@ -62,8 +62,7 @@ public final class CarpetTrapdoors {
 
     public enum Type {
         WOODEN("carpet_trapdoor", BlockSetType.OAK),
-        IRON("carpet_iron_trapdoor", BlockSetType.IRON),
-        COPPER("carpet_copper_trapdoor", BlockSetType.COPPER);
+        IRON("carpet_iron_trapdoor", BlockSetType.IRON);
 
         public final String suffix;
         public final BlockSetType blockSetType;
@@ -95,7 +94,7 @@ public final class CarpetTrapdoors {
                     .sound(carpet.carpet.defaultBlockState().getSoundType())
                     .strength(0.1F)
                     .noOcclusion();
-            return new CarpetTrapdoorBlock(type.blockSetType, properties, name());
+            return new CarpetTrapdoorBlock(properties, type.blockSetType, name());
         }
     }
 
@@ -143,7 +142,7 @@ public final class CarpetTrapdoors {
     }
 
     public static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+        return new ResourceLocation(MOD_ID, path);
     }
 
     // Creative tab

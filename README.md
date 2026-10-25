@@ -1,10 +1,10 @@
 # Carpet Trapdoors
 
-Simple mod that disguises wooden, iron and copper trapdoors as carpets.
+Simple mod that disguises wooden and iron trapdoors as carpets (copper trapdoors on 1.21+).
 
 All trapdoors still behave like vanilla trapdoors with all functionality. The recipe accepts every
 type of wooden trapdoor, the iron trapdoor, every copper trapdoor (any oxidation, waxed or not)
-and every carpet, including moss.
+and every carpet, including moss. (Copper only exists from Minecraft 1.21 on.)
 
 ![Recipe GIF](recipe.gif)
 
@@ -29,21 +29,21 @@ Copper carpet trapdoors need Minecraft 1.21 or newer.
 ## Development
 
 One repository builds the mod for **Fabric, NeoForge and Forge**. Each Minecraft version lives on
-its own branch (`1.20.1`, `1.21.1`, …).
+its own branch (`1.20.1`, `1.21.1`, …). On **1.20.1 and older** there is no NeoForge module (NeoForge 1.20.1 loads Forge mods, so the
+Forge jar covers it) and the data generators live in `forge/`.
 
 | Module      | Contents                                                                     |
 |-------------|------------------------------------------------------------------------------|
 | `common/`   | The block, the list of all variants, the creative tab and all resources      |
 | `fabric/`   | Fabric entry point (registration only)                                        |
-| `neoforge/` | NeoForge entry point and the data generators                                  |
-| `forge/`    | Forge entry point (registration only)                                         |
+| `forge/`    | Forge entry point and the data generators                                     |
 
-Useful commands (JDK 21 required):
+Useful commands (this branch needs JDK 17 or newer to run Gradle):
 
 ```
 ./gradlew build                # builds all three jars into <loader>/build/libs
-./gradlew :neoforge:runData    # regenerates common/src/generated/resources
-./gradlew :fabric:runClient    # or :neoforge:runClient / :forge:Client
+./gradlew :forge:runData       # regenerates common/src/generated/resources
+./gradlew :fabric:runClient    # or :forge:runClient
 ```
 
 Block states, models, recipes, loot tables, tags and translations are **generated** – never edit
@@ -54,7 +54,7 @@ Block states, models, recipes, loot tables, tags and translations are **generate
 
 1. `git checkout -b <new version>` from the newest branch.
 2. Update `gradle.properties` (versions are listed in the comments there).
-3. Fix compile errors, run `./gradlew :neoforge:runData`, then `./gradlew build`.
+3. Fix compile errors, run the data generators, then `./gradlew build`.
 4. Later fixes are made on the oldest affected branch and merged forward.
 
 The build setup is based on [MultiLoader-Template](https://github.com/jaredlll08/MultiLoader-Template).

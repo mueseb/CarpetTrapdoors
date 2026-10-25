@@ -1,7 +1,5 @@
 package at.mueseb.carpettrapdoors;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
@@ -19,11 +17,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
  */
 public class CarpetTrapdoorBlock extends TrapDoorBlock {
 
-    public static final MapCodec<CarpetTrapdoorBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            BlockSetType.CODEC.fieldOf("block_set_type").forGetter(CarpetTrapdoorBlock::getType),
-            propertiesCodec()
-    ).apply(instance, CarpetTrapdoorBlock::new));
-
     private static final VoxelShape BOTTOM = Block.box(0, 0, 0, 16, 1, 16);
     private static final VoxelShape TOP = Block.box(0, 15, 0, 16, 16, 16);
     private static final VoxelShape NORTH_OPEN = Block.box(0, 0, 15, 16, 16, 16);
@@ -33,13 +26,13 @@ public class CarpetTrapdoorBlock extends TrapDoorBlock {
 
     private final Component name;
 
-    public CarpetTrapdoorBlock(BlockSetType type, Properties properties) {
-        this(type, properties, null);
+    public CarpetTrapdoorBlock(Properties properties, BlockSetType type) {
+        this(properties, type, null);
     }
 
     /** @param name the display name, or {@code null} for the default name from the translation key */
-    public CarpetTrapdoorBlock(BlockSetType type, Properties properties, Component name) {
-        super(type, properties);
+    public CarpetTrapdoorBlock(Properties properties, BlockSetType type, Component name) {
+        super(properties, type);
         this.name = name;
     }
 
@@ -49,12 +42,7 @@ public class CarpetTrapdoorBlock extends TrapDoorBlock {
     }
 
     @Override
-    public MapCodec<? extends TrapDoorBlock> codec() {
-        return CODEC;
-    }
-
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (!state.getValue(OPEN)) {
             return state.getValue(HALF) == Half.TOP ? TOP : BOTTOM;
         }

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "carpet_iron_trapdoor",
+  "key": {
+    "#": {
+      "item": "minecraft:white_carpet"
+    },
+    "O": {
+      "item": "minecraft:iron_trapdoor"
+    }
+  },
+  "pattern": [
+    " # ",
+    "#O#",
+    " # "
+  ],
+  "result": {
+    "item": "carpettrapdoors:white_carpet_iron_trapdoor"
+  },
+  "show_notification": true
+}
