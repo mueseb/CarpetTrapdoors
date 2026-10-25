@@ -3,7 +3,7 @@ package at.mueseb.carpettrapdoors.forge.data;
 import at.mueseb.carpettrapdoors.CarpetTrapdoors;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -21,12 +21,12 @@ public final class DataGenerators {
         DataGenerator generator = event.getGenerator();
         ExistingFileHelper files = event.getExistingFileHelper();
 
-        generator.addProvider(event.includeClient(), new ModBlockStateProvider(generator, files));
-        ModLanguageProvider.TRANSLATIONS.keySet().forEach(locale ->
-                generator.addProvider(event.includeClient(), new ModLanguageProvider(generator, locale)));
+        // The data run always generates everything; there is no client/server split before 1.19.
+        generator.addProvider(new ModBlockStateProvider(generator, files));
+        ModLanguageProvider.TRANSLATIONS.keySet().forEach(locale -> generator.addProvider(new ModLanguageProvider(generator, locale)));
 
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(generator));
-        generator.addProvider(event.includeServer(), new ModBlockLootProvider(generator));
-        generator.addProvider(event.includeServer(), new ModBlockTagsProvider(generator, files));
+        generator.addProvider(new ModRecipeProvider(generator));
+        generator.addProvider(new ModBlockLootProvider(generator));
+        generator.addProvider(new ModBlockTagsProvider(generator, files));
     }
 }

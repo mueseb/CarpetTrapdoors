@@ -1,6 +1,11 @@
 {
   "type": "minecraft:crafting_shaped",
   "group": "carpet_iron_trapdoor",
+  "pattern": [
+    " # ",
+    "#O#",
+    " # "
+  ],
   "key": {
     "#": {
       "item": "minecraft:gray_carpet"
@@ -9,11 +14,6 @@
       "item": "minecraft:iron_trapdoor"
     }
   },
-  "pattern": [
-    " # ",
-    "#O#",
-    " # "
-  ],
   "result": {
     "item": "carpettrapdoors:gray_carpet_iron_trapdoor"
   }

@@ -1,6 +1,6 @@
 {
-  "block.carpettrapdoors.carpet_iron_trapdoor": "%s铁活板门",
-  "block.carpettrapdoors.carpet_trapdoor": "%s活板门",
-  "itemGroup.carpettrapdoors": "地毯活板门",
-  "itemGroup.carpettrapdoors.carpettrapdoors": "地毯活板门"
+  "block.carpettrapdoors.carpet_iron_trapdoor": "%s\u94C1\u6D3B\u677F\u95E8",
+  "block.carpettrapdoors.carpet_trapdoor": "%s\u6D3B\u677F\u95E8",
+  "itemGroup.carpettrapdoors": "\u5730\u6BEF\u6D3B\u677F\u95E8",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "\u5730\u6BEF\u6D3B\u677F\u95E8"
 }

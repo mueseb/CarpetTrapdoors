@@ -1,6 +1,7 @@
 package at.mueseb.carpettrapdoors;
 
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -86,7 +87,7 @@ public final class CarpetTrapdoors {
 
         /** "Red Carpet" + "%s Iron Trapdoor" = "Red Carpet Iron Trapdoor", in every language vanilla supports. */
         public Component name() {
-            return Component.translatable(type.translationKey(), carpet.carpet.getName());
+            return new TranslatableComponent(type.translationKey(), carpet.carpet.getName());
         }
 
         public CarpetTrapdoorBlock createBlock() {

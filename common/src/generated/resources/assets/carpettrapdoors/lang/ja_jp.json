@@ -1,6 +1,6 @@
 {
-  "block.carpettrapdoors.carpet_iron_trapdoor": "%sの鉄のトラップドア",
-  "block.carpettrapdoors.carpet_trapdoor": "%sのトラップドア",
-  "itemGroup.carpettrapdoors": "カーペットトラップドア",
-  "itemGroup.carpettrapdoors.carpettrapdoors": "カーペットトラップドア"
+  "block.carpettrapdoors.carpet_iron_trapdoor": "%s\u306E\u9244\u306E\u30C8\u30E9\u30C3\u30D7\u30C9\u30A2",
+  "block.carpettrapdoors.carpet_trapdoor": "%s\u306E\u30C8\u30E9\u30C3\u30D7\u30C9\u30A2",
+  "itemGroup.carpettrapdoors": "\u30AB\u30FC\u30DA\u30C3\u30C8\u30C8\u30E9\u30C3\u30D7\u30C9\u30A2",
+  "itemGroup.carpettrapdoors.carpettrapdoors": "\u30AB\u30FC\u30DA\u30C3\u30C8\u30C8\u30E9\u30C3\u30D7\u30C9\u30A2"
 }
